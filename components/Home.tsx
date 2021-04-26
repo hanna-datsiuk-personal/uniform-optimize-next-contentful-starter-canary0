@@ -9,7 +9,7 @@ import { PersonalizedHero } from '../components/PersonalizedHero';
 import { ComponentMapping } from '../lib/ComponentMapping';
 import TalkList from '../components/TalkList';
 import { RegisterForm } from '../components/RegisterForm';
-import { WhyAttend } from '../components/WhyAttend';
+import { WhyAttendTestPhotoLocation } from '../components/WhyAttend';
 
 export interface PageProps {
   slug: string;
@@ -24,7 +24,7 @@ const componentMapping: ComponentMapping = {
   '3zPkEj1KqeSn4QdsdnNKO3': PersonalizedHero,
   talksList: TalkList,
   registrationForm: RegisterForm,
-  whyAttend: WhyAttend,
+  whyAttend: WhyAttendTestPhotoLocation,
 };
 
 export function Home({ page, talks }: PageProps) {
