@@ -1,14 +1,47 @@
 import { Entry } from 'contentful';
 import React from 'react';
 import { WhyAttendFields } from '../lib/contentful';
+import { Test } from '@uniformdev/optimize-tracker-react';
+import { TestVariant } from '@uniformdev/optimize-tracker-common';
 
-type WhyAttendProps = Entry<WhyAttendFields>;
+export const WhyAttendLoading = () => {
+  return <div className="container mx-auto flex flex-wrap pt-4 pb-12" style={{ minHeight: 515 }}></div>;
+};
 
-export const WhyAttend = ({ fields: { title, description, image } }: WhyAttendProps) => {
+enum PhotoLocation {
+  Left = 'left',
+  Right = 'right',
+}
+
+type WhyAttendProps = Entry<WhyAttendFields> & {
+  photoLocation: PhotoLocation | string;
+};
+
+const locationVariants: TestVariant[] = [{ id: PhotoLocation.Left }, { id: PhotoLocation.Right }];
+
+export const WhyAttendTestPhotoLocation = (props: Entry<WhyAttendFields>) => {
+  return (
+    <Test
+      name="Why Attend Photo Location Test"
+      componentName="Why Attend"
+      variations={locationVariants}
+      loadingMode={WhyAttendLoading}
+      disableComponentGeneration={true}
+    >
+      {({ variation }) => {
+        return <WhyAttend {...props} photoLocation={variation.id} />;
+      }}
+    </Test>
+  );
+};
+
+
+export const WhyAttend = ({ fields: { title, description, image }, photoLocation) => {
   return (
     <section className="bg-white border-b py-8">
       <div
         className="container mx-auto flex flex-wrap pt-4 pb-12"
+        style={{ flexDirection: photoLocation === PhotoLocation.Left ? 'row' : 'row-reverse' }}
       >
         <div className="w-1/2">
           <img src={image.fields.file.url} className="p-10" />
