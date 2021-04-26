@@ -36,7 +36,7 @@ export const WhyAttendTestPhotoLocation = (props: Entry<WhyAttendFields>) => {
 };
 
 
-export const WhyAttend = ({ fields: { title, description, image }, photoLocation) => {
+export const WhyAttend = ({ fields: { title, description, image }, photoLocation}: WhyAttendProps) => {
   return (
     <section className="bg-white border-b py-8">
       <div
